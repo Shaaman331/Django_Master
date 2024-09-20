@@ -2,8 +2,9 @@
    <head>
         <title>Meus Carros</title>
     </head>
-    <body>
-        <h1>Venda de Carros</h1>
-        <h3>Carros 0 km ! </h3>
-    </body>
+    {% block content %}
+        <body>
+            <h3>Carro 1: {{ cars.model }}</h3>
+        </body>
+    {% endblock %}
 </html>
