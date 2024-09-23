@@ -1,0 +1,10 @@
+/* criando a tela para renderizar herdando do "base.html" */
+
+{% extends "base.html" %}
+
+{% block content %}
+    <form method ="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ new_car_form }}
+    </form>
+{% endblock %}

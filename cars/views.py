@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from cars.models import Car
+from cars.forms import CarForm
 
 
 # Create your views here.
@@ -16,3 +17,7 @@ def cars_view(request):
         {'cars': cars}  # Passa o objeto cars para o template
 
         ) 
+
+def new_car_view(request):  # Funcao para criar um new_car_view
+    new_car_form = CarForm()  # Cria um objeto CarForm
+    return render (request, 'new_car.html', {'new_car_form' :  new_car_form}) # Renderiza o template new_car.html e passa o objeto new_car_form
