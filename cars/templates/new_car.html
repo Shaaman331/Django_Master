@@ -1,10 +1,14 @@
-/* criando a tela para renderizar herdando do "base.html" */
-
 {% extends "base.html" %}
 
 {% block content %}
     <form method ="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ new_car_form }}
+
+    <table>
+        {{ new_car_form.as_table }}
+    </table>
+    <input type ="submit" value="Cadastrar" class="btn btn-primary">
+
+
     </form>
 {% endblock %}
