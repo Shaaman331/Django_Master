@@ -24,8 +24,12 @@ class CarForm(forms.Form):
             photo = self.cleaned_data['photo'],
         )
         car.save() # Salva o objeto no banco de dados
-
         return car
+    
+class CarModelForm(forms.ModelForm):  #Criando um formulário de modelo de carro usando ModelForm
+    class Meta:
+        model = Car
+        fields = "__all__"
 
 
 

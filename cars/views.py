@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from cars.models import Car
-from cars.forms import CarForm
+from cars.forms import CarModelForm
 
 
 # Create your views here.
@@ -20,10 +20,10 @@ def cars_view(request):
 
 def new_car_view(request):  # Funcao para criar um new_car_view
     if  request.method == 'POST':  # Verifica se o metodo da requisição foi POST
-        new_car_form  = CarForm(request.POST, request.FILES)  # Cria um objeto CarForm com os dados do usuario 
+        new_car_form  = CarModelForm(request.POST, request.FILES)  # Cria um objeto CarForm com os dados do usuario 
         if new_car_form.is_valid():   # Verifica se o objeto CarForm e valido
             new_car_form.save()   # type: ignore # Salva o objeto CarForm no banco de dados
             return redirect('cars_list')  # Redireciona para a view cars_view
     else:
-        new_car_form = CarForm()  # Cria um objeto CarForm
+        new_car_form = CarModelForm()  # Cria um objeto CarForm
         return render (request, 'new_car.html', {'new_car_form' :  new_car_form}) # Renderiza o template new_car.html e passa o objeto new_car_form
