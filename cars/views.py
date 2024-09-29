@@ -19,7 +19,7 @@ def cars_view(request):
         ) 
 
 def new_car_view(request):  # Funcao para criar um new_car_view
-    if  request.method == 'POST':  # Verifica se o metodo da requisição foi POST
+    if request.method == 'POST':  # Verifica se o metodo da requisição foi POST
         new_car_form  = CarModelForm(request.POST, request.FILES)  # Cria um objeto CarForm com os dados do usuario 
         if new_car_form.is_valid():   # Verifica se o objeto CarForm e valido
             new_car_form.save()   # type: ignore # Salva o objeto CarForm no banco de dados
