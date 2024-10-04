@@ -11,28 +11,31 @@
         color: #333;
         margin: 0;
         padding: 0;
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .dark-mode {
+        background-color: #1d3557;
+        color: #f1faee;
     }
 
     header {
-        background-color: #0096c7;
+        background-color: #6a0dad;
         color: #fff;
         text-align: center;
-    }
-
-    footer {
-        background-color: #ccc;
-        color: #333;
-        padding: 20px;
-        text-align: center;
-    }
-
-    nav {
-        background-color: #0096c7;
-        color: #fff;
-        height: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+        background-color: #0077b6;
+        color: #f1faee;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     }
 
     nav ul {
@@ -43,40 +46,78 @@
     }
 
     nav ul li {
-        margin: 0 10px;
+        margin: 0 15px;
     }
 
     nav ul li a {
         color: #fff;
         text-decoration: none;
         font-size: 16px;
-        padding: 15px;
-        transition: all 0.3s ease;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        border-radius: 5px;
     }
 
     nav ul li a:hover {
-        background-color: #32bbe8;
+        background-color: #023e8a;
+        color: #f1faee;
     }
 
     nav ul li.active a {
-        background-color: #666;
+        background-color: #023e8a;
     }
 
-    nav ul li.active a:hover {
-        background-color: #999;
+    #darkModeBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.3s ease;
     }
 
+    #darkModeBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #darkModeBtn svg {
+        width: 30px;
+        height: 30px;
+        fill: #fff;
+        transition: fill 0.3s ease;
+    }
+
+    #darkModeBtn:hover svg {
+        fill: #32bbe8;
+    }
+
+    .dark-mode #darkModeBtn svg {
+        fill: yellow;
+    }
   </style>
 </head>
 <body>
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'cars_list' %}">Carros</a></li>
+        {% if user.is_authenticated %}
+        <li>Olá, {{ user.username }}!</li>
         <li><a href="{% url 'new_car' %}">Cadastrar Carro</a></li>
-
+        {% endif %}
+        {%if not user.is_authenticated %}
+        <li><a href="{% url 'register'%}">Cadastre-se</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+        <li><a href="{% url 'cars_list' %}">Carros</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Sair</a></li>
+        {% endif %}
       </ul>
     </nav>
+    <button id="darkModeBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M9 21h6v-1H9v1zm3-20C8.924 1 6 3.924 6 7.5c0 2.615 1.613 4.855 4 5.656V16h4v-2.844c2.387-.801 4-3.041 4-5.656C18 3.924 15.076 1 12 1zm1 10h-2V9h2v2zm-2-4h2V5h-2v2z"/>
+      </svg>
+    </button>
   </header>
 
   <main>
@@ -87,5 +128,12 @@
   <footer>
     <p>&copy; 2024 PycodeBR Multimarcas</p>
   </footer>
+
+  <script>
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    darkModeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+  </script>
 </body>
 </html>
